@@ -5,6 +5,7 @@ const trainerSchema = new mongoose.Schema({
         type: String,
         required: [true, "You must specify a name."],
         trim: true,
+        unique: true
     },
     age: Number,
     ownedPokemon: {
