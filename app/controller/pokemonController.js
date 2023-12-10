@@ -5,16 +5,17 @@ const getAllPokemon = async (req, res) => {
     res.status(200).json({
         pokemon,
         success: true,
-        message: `${req.method} - request to Author endpoint`
+        message: `${req.method} - request to Pokemon endpoint`
     });
 }
 
-const getPokemonByName = (req, res) => {
-    const {name} = req.params;
+const getPokemonByName = async (req, res) => {
+    const name = req.params.id;
+    const pokemon = await Pokemon.findOne({name: name});
     res.status(200).json({
-        name,
+        pokemon,
         success: true,
-        message: `${req.method} - request to Author endpoint`
+        message: `${req.method} - request to Pokemon endpoint`
     });
 };
 
@@ -24,26 +25,27 @@ const createPokemon = async (req, res) => {
     console.log("data >>>", newPokemon);
     res.status(200).json({
         success: true,
-        message: `${req.method} - request to Author endpoint`
+        message: `${req.method} - request to Pokemon endpoint`
     });
 }
 
 const updatePokemon = async (req, res) => {
-    const {name} = req.params;
-    const { pokemon } = await Authors.findByIdAndUpdate(name, req.body, {new: true});
+    const name = req.params.id;
+    const pokemon = await Pokemon.findOneAndUpdate({name}, req.body, {new:true});
     res.status(200).json({
         pokemon,
         success: true,
-        message: `${req.method} - request to Author endpoint`
+        message: `${req.method} - request to Pokemon endpoint`
     });
 };
 
-const deletePokemon = (req, res) => {
-    const {name} = req.params;
+const deletePokemon = async (req, res) => {
+    const name = req.params.id;
+    const pokemon = await Pokemon.findOneAndDelete({name: name});
     res.status(200).json({
-        name,
+        pokemon,
         success: true,
-        message: `${req.method} - request to Author endpoint`
+        message: `${req.method} - request to Pokemon endpoint`
     });
 };
 
