@@ -1,9 +1,17 @@
 const mongoose = require("mongoose");
 
 const trainerSchema = new mongoose.Schema({
-    name: String,
+    name: {
+        type: String,
+        required: [true, "You must specify a name."],
+        trim: true,
+    },
     age: Number,
-    ownedPokemon: Array
+    ownedPokemon: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: "Pokemon"
+    }
+
 });
 
 module.exports = mongoose.model('Trainer', trainerSchema);
