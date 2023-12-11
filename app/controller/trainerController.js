@@ -52,7 +52,7 @@ const createTrainer = async (req, res) => {
         else if (error.code === 11000) {
             console.error(error);
             res.status(409).json({
-                message: "This Pokemon already exists.",
+                message: "This trainer already exists.",
                 error
             });
         }
